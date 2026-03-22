@@ -186,6 +186,8 @@
     position: relative;
     cursor: pointer;
     transition: background 0.15s;
+  }
+  .clock-card.animate-in {
     animation: slideIn 0.3s ease forwards;
   }
   @keyframes slideIn {
@@ -490,7 +492,7 @@ const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 const DAYS_LONG = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-function buildClocks() {
+function buildClocks(newIndex) {
   const list = document.getElementById('clockList');
   list.innerHTML = '';
   if (!savedClocks.length) {
@@ -499,7 +501,7 @@ function buildClocks() {
   }
   savedClocks.forEach((c, i) => {
     const card = document.createElement('div');
-    card.className = 'clock-card';
+    card.className = 'clock-card' + (i === newIndex ? ' animate-in' : '');
     card.dataset.index = i;
     card.dataset.tz = c.tz;
     card.innerHTML = `
@@ -610,7 +612,7 @@ function addClock(city) {
   if (!c || savedClocks.some(s => s.city === c.city && s.tz === c.tz)) return;
   savedClocks.push(c);
   localStorage.setItem('worldClocks', JSON.stringify(savedClocks));
-  buildClocks();
+  buildClocks(savedClocks.length - 1); // pass index of new card to animate
   searchInput.value = '';
   searchResults.classList.remove('visible');
 }
