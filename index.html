@@ -485,18 +485,12 @@ function formatDiff(diff) {
     : { text: `${s} behind`, cls: "behind" };
 }
 
-function updateAnalog(card, tz) {
-  const t = getTimeInZone(tz);
-  const h = t.getHours() % 12, m = t.getMinutes(), s = t.getSeconds();
-  const hDeg = h * 30 + m * 0.5;
-  const mDeg = m * 6;
-  const sDeg = s * 6;
-  card.querySelector('.hour-hand').style.transform = `rotate(${hDeg}deg)`;
-  card.querySelector('.min-hand').style.transform = `rotate(${mDeg}deg)`;
-  card.querySelector('.sec-hand').style.transform = `rotate(${sDeg}deg)`;
-}
+const DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS_LONG = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-function renderClocks() {
+function buildClocks() {
   const list = document.getElementById('clockList');
   list.innerHTML = '';
   if (!savedClocks.length) {
@@ -504,19 +498,10 @@ function renderClocks() {
     return;
   }
   savedClocks.forEach((c, i) => {
-    const t = getTimeInZone(c.tz);
-    const h = t.getHours(), m = t.getMinutes();
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const h12 = h % 12 || 12;
-    const mStr = String(m).padStart(2, '0');
-    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    const dateStr = `${days[t.getDay()]}, ${months[t.getMonth()]} ${t.getDate()}`;
-    const diff = formatDiff(getLocalOffset(c.tz));
-
     const card = document.createElement('div');
     card.className = 'clock-card';
     card.dataset.index = i;
+    card.dataset.tz = c.tz;
     card.innerHTML = `
       <div class="analog-clock">
         <div class="analog-face">
@@ -529,38 +514,66 @@ function renderClocks() {
       <div class="clock-info">
         <div class="clock-city">${c.city}</div>
         <div class="clock-country">${c.country}</div>
-        <div class="clock-diff ${diff.cls}">${diff.text}</div>
+        <div class="clock-diff"></div>
       </div>
       <div class="clock-time-wrap">
-        <div class="clock-time">${h12}:${mStr}</div>
-        <div class="clock-ampm">${ampm}</div>
-        <div class="clock-date">${dateStr}</div>
+        <div class="clock-time"></div>
+        <div class="clock-ampm"></div>
+        <div class="clock-date"></div>
       </div>
     `;
-    updateAnalog(card, c.tz);
     list.appendChild(card);
+  });
+  const cards = list.querySelectorAll('.clock-card');
+  cards.forEach((card, i) => {
+    if (cards.length === 1) card.style.borderRadius = '14px';
+    else if (i === 0) card.style.borderRadius = '14px 14px 0 0';
+    else if (i === cards.length - 1) card.style.borderRadius = '0 0 14px 14px';
+    else card.style.borderRadius = '0';
+  });
+  updateClocks();
+}
+
+function updateClocks() {
+  document.querySelectorAll('.clock-card').forEach(card => {
+    const tz = card.dataset.tz;
+    const t = getTimeInZone(tz);
+    const h = t.getHours(), m = t.getMinutes(), s = t.getSeconds();
+    const h12 = h % 12 || 12;
+    const mStr = String(m).padStart(2, '0');
+    const diff = formatDiff(getLocalOffset(tz));
+
+    card.querySelector('.clock-time').textContent = `${h12}:${mStr}`;
+    card.querySelector('.clock-ampm').textContent = h >= 12 ? 'PM' : 'AM';
+    card.querySelector('.clock-date').textContent =
+      `${DAYS_SHORT[t.getDay()]}, ${MONTHS_SHORT[t.getMonth()]} ${t.getDate()}`;
+    const diffEl = card.querySelector('.clock-diff');
+    diffEl.textContent = diff.text;
+    diffEl.className = `clock-diff ${diff.cls}`;
+
+    const hDeg = (h % 12) * 30 + m * 0.5;
+    card.querySelector('.hour-hand').style.transform = `rotate(${hDeg}deg)`;
+    card.querySelector('.min-hand').style.transform = `rotate(${m * 6}deg)`;
+    card.querySelector('.sec-hand').style.transform = `rotate(${s * 6}deg)`;
   });
 }
 
 function updateMyTime() {
   const now = new Date();
-  const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+  const h = now.getHours(), m = now.getMinutes();
   const h12 = h % 12 || 12;
   const mStr = String(m).padStart(2, '0');
-  const sStr = String(s).padStart(2, '0');
-  const ampm = h >= 12 ? 'PM' : 'AM';
   document.getElementById('myTime').textContent = `${h12}:${mStr}`;
-  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('myDate').textContent = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  document.getElementById('myZone').textContent = tz.replace('_', ' ');
+  document.getElementById('myDate').textContent =
+    `${DAYS_LONG[now.getDay()]}, ${MONTHS_LONG[now.getMonth()]} ${now.getDate()}`;
+  document.getElementById('myZone').textContent =
+    Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ');
   document.getElementById('statusTime').textContent = `${h12}:${mStr}`;
 }
 
 function tick() {
   updateMyTime();
-  renderClocks();
+  updateClocks();
 }
 
 // Search
@@ -597,7 +610,7 @@ function addClock(city) {
   if (!c || savedClocks.some(s => s.city === c.city && s.tz === c.tz)) return;
   savedClocks.push(c);
   localStorage.setItem('worldClocks', JSON.stringify(savedClocks));
-  renderClocks();
+  buildClocks();
   searchInput.value = '';
   searchResults.classList.remove('visible');
 }
@@ -619,7 +632,7 @@ document.getElementById('clockList').addEventListener('mousedown', e => {
     if (confirm(`Remove ${savedClocks[i].city}?`)) {
       savedClocks.splice(i, 1);
       localStorage.setItem('worldClocks', JSON.stringify(savedClocks));
-      renderClocks();
+      buildClocks();
     }
   }, 600);
 });
@@ -635,12 +648,13 @@ document.getElementById('clockList').addEventListener('touchstart', e => {
     if (confirm(`Remove ${savedClocks[i].city}?`)) {
       savedClocks.splice(i, 1);
       localStorage.setItem('worldClocks', JSON.stringify(savedClocks));
-      renderClocks();
+      buildClocks();
     }
   }, 600);
 }, { passive: true });
 document.getElementById('clockList').addEventListener('touchend', () => clearTimeout(pressTimer));
 
+buildClocks();
 tick();
 setInterval(tick, 1000);
 </script>
