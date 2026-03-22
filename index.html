@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,307 +9,308 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-  :root {
-    --bg: #000;
-    --surface: #1c1c1e;
-    --surface2: #2c2c2e;
-    --border: rgba(255,255,255,0.08);
-    --text: #fff;
-    --text-secondary: rgba(255,255,255,0.55);
-    --accent: #ff9f0a;
-    --accent2: #30d158;
-    --danger: #ff453a;
-    --blue: #0a84ff;
-  }
+:root {
+–bg: #000;
+–surface: #1c1c1e;
+–surface2: #2c2c2e;
+–border: rgba(255,255,255,0.08);
+–text: #fff;
+–text-secondary: rgba(255,255,255,0.55);
+–accent: #ff9f0a;
+–accent2: #30d158;
+–danger: #ff453a;
+–blue: #0a84ff;
+}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', -apple-system, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px 0 40px;
-  }
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘DM Sans’, -apple-system, sans-serif;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding: 20px 0 40px;
+}
 
-  .phone {
-    width: 393px;
-    min-height: 852px;
-    background: var(--bg);
-    border-radius: 54px;
-    box-shadow: 0 0 0 10px #1a1a1a, 0 0 0 12px #2a2a2a, 0 40px 80px rgba(0,0,0,0.8);
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
+.phone {
+width: 393px;
+min-height: 852px;
+background: var(–bg);
+border-radius: 54px;
+box-shadow: 0 0 0 10px #1a1a1a, 0 0 0 12px #2a2a2a, 0 40px 80px rgba(0,0,0,0.8);
+overflow: hidden;
+position: relative;
+display: flex;
+flex-direction: column;
+}
 
-  /* Notch */
-  .notch {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 126px;
-    height: 37px;
-    background: #000;
-    border-radius: 0 0 20px 20px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-  .notch-camera { width: 12px; height: 12px; background: #1a1a1a; border-radius: 50%; border: 2px solid #222; }
-  .notch-speaker { width: 50px; height: 5px; background: #1a1a1a; border-radius: 3px; }
+/* Notch */
+.notch {
+position: absolute;
+top: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 126px;
+height: 37px;
+background: #000;
+border-radius: 0 0 20px 20px;
+z-index: 100;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+}
+.notch-camera { width: 12px; height: 12px; background: #1a1a1a; border-radius: 50%; border: 2px solid #222; }
+.notch-speaker { width: 50px; height: 5px; background: #1a1a1a; border-radius: 3px; }
 
-  /* Status bar */
-  .status-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 28px 0;
-    height: 54px;
-    flex-shrink: 0;
-  }
-  .status-time { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
-  .status-icons { display: flex; gap: 6px; align-items: center; }
-  .status-icons svg { fill: white; }
+/* Status bar */
+.status-bar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 14px 28px 0;
+height: 54px;
+flex-shrink: 0;
+}
+.status-time { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
+.status-icons { display: flex; gap: 6px; align-items: center; }
+.status-icons svg { fill: white; }
 
-  .content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 20px 20px;
-    scrollbar-width: none;
-  }
-  .content::-webkit-scrollbar { display: none; }
+.content {
+flex: 1;
+overflow-y: auto;
+padding: 0 20px 20px;
+scrollbar-width: none;
+}
+.content::-webkit-scrollbar { display: none; }
 
-  /* Header */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 12px 4px 16px;
-  }
-  .header-title { font-size: 34px; font-weight: 700; letter-spacing: -0.5px; }
-  .edit-btn {
-    font-size: 17px;
-    color: var(--accent);
-    font-weight: 400;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px 0;
-  }
+/* Header */
+.header {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+padding: 12px 4px 16px;
+}
+.header-title { font-size: 34px; font-weight: 700; letter-spacing: -0.5px; }
+.edit-btn {
+font-size: 17px;
+color: var(–accent);
+font-weight: 400;
+background: none;
+border: none;
+cursor: pointer;
+padding: 4px 0;
+}
 
-  /* Search */
-  .search-wrap {
-    margin-bottom: 20px;
-    position: relative;
-  }
-  .search-input {
-    width: 100%;
-    background: var(--surface2);
-    border: none;
-    border-radius: 12px;
-    padding: 10px 16px 10px 38px;
-    color: var(--text);
-    font-size: 17px;
-    font-family: inherit;
-    outline: none;
-    transition: background 0.2s;
-  }
-  .search-input::placeholder { color: var(--text-secondary); }
-  .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-secondary);
-    font-size: 16px;
-    pointer-events: none;
-  }
-  .search-results {
-    display: none;
-    background: var(--surface);
-    border-radius: 12px;
-    margin-top: 4px;
-    overflow: hidden;
-    max-height: 280px;
-    overflow-y: auto;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  }
-  .search-results.visible { display: block; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .search-item {
-    padding: 14px 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-  }
-  .search-item:last-child { border-bottom: none; }
-  .search-item:hover, .search-item:active { background: var(--surface2); }
-  .search-item-flag { font-size: 22px; }
-  .search-item-info { flex: 1; }
-  .search-item-city { font-size: 16px; font-weight: 500; }
-  .search-item-country { font-size: 13px; color: var(--text-secondary); }
-  .search-item-add {
-    color: var(--blue);
-    font-size: 13px;
-    font-weight: 500;
-    background: rgba(10,132,255,0.15);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
+/* Search */
+.search-wrap {
+margin-bottom: 20px;
+position: relative;
+}
+.search-input {
+width: 100%;
+background: var(–surface2);
+border: none;
+border-radius: 12px;
+padding: 10px 16px 10px 38px;
+color: var(–text);
+font-size: 17px;
+font-family: inherit;
+outline: none;
+transition: background 0.2s;
+}
+.search-input::placeholder { color: var(–text-secondary); }
+.search-icon {
+position: absolute;
+left: 12px;
+top: 50%;
+transform: translateY(-50%);
+color: var(–text-secondary);
+font-size: 16px;
+pointer-events: none;
+}
+.search-results {
+display: none;
+background: var(–surface);
+border-radius: 12px;
+margin-top: 4px;
+overflow: hidden;
+max-height: 280px;
+overflow-y: auto;
+box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.search-results.visible { display: block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.search-item {
+padding: 14px 16px;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 12px;
+border-bottom: 1px solid var(–border);
+transition: background 0.15s;
+}
+.search-item:last-child { border-bottom: none; }
+.search-item:hover, .search-item:active { background: var(–surface2); }
+.search-item-flag { font-size: 22px; }
+.search-item-info { flex: 1; }
+.search-item-city { font-size: 16px; font-weight: 500; }
+.search-item-country { font-size: 13px; color: var(–text-secondary); }
+.search-item-add {
+color: var(–blue);
+font-size: 13px;
+font-weight: 500;
+background: rgba(10,132,255,0.15);
+padding: 4px 10px;
+border-radius: 20px;
+}
 
-  /* Section */
-  .section-label {
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-secondary);
-    padding: 0 4px 8px;
-  }
+/* Section */
+.section-label {
+font-size: 13px;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+color: var(–text-secondary);
+padding: 0 4px 8px;
+}
 
-  /* Clock card */
-  .clock-list { display: flex; flex-direction: column; gap: 1px; margin-bottom: 28px; }
+/* Clock card */
+.clock-list { display: flex; flex-direction: column; gap: 1px; margin-bottom: 28px; }
 
-  .clock-card {
-    background: var(--surface);
-    padding: 16px 18px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .clock-card.animate-in {
-    animation: slideIn 0.3s ease forwards;
-  }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .clock-card:first-child { border-radius: 14px 14px 0 0; }
-  .clock-card:last-child { border-radius: 0 0 14px 14px; }
-  .clock-card:only-child { border-radius: 14px; }
-  .clock-card + .clock-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 18px; right: 0;
-    height: 1px;
-    background: var(--border);
-  }
-  .clock-card:active { background: var(--surface2); }
+.clock-card {
+background: var(–surface);
+padding: 16px 18px;
+display: flex;
+align-items: center;
+gap: 14px;
+position: relative;
+cursor: pointer;
+transition: background 0.15s;
+}
+.clock-card.animate-in {
+animation: slideIn 0.3s ease forwards;
+}
+@keyframes slideIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.clock-card:first-child { border-radius: 14px 14px 0 0; }
+.clock-card:last-child { border-radius: 0 0 14px 14px; }
+.clock-card:only-child { border-radius: 14px; }
+.clock-card + .clock-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 18px; right: 0;
+height: 1px;
+background: var(–border);
+}
+.clock-card:active { background: var(–surface2); }
 
-  .clock-flag { font-size: 32px; flex-shrink: 0; }
-  .clock-info { flex: 1; min-width: 0; }
-  .clock-city { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .clock-country { font-size: 13px; color: var(--text-secondary); margin-top: 1px; }
-  .clock-diff {
-    font-size: 12px;
-    margin-top: 4px;
-    font-weight: 500;
-  }
-  .clock-diff.ahead { color: var(--accent2); }
-  .clock-diff.behind { color: var(--accent); }
-  .clock-diff.same { color: var(--text-secondary); }
+.clock-flag { font-size: 32px; flex-shrink: 0; }
+.clock-info { flex: 1; min-width: 0; }
+.clock-city { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.clock-country { font-size: 13px; color: var(–text-secondary); margin-top: 1px; }
+.clock-diff {
+font-size: 12px;
+margin-top: 4px;
+font-weight: 500;
+}
+.clock-diff.ahead { color: var(–accent2); }
+.clock-diff.behind { color: var(–accent); }
+.clock-diff.same { color: var(–text-secondary); }
 
-  .clock-time-wrap { text-align: right; flex-shrink: 0; }
-  .clock-time {
-    font-size: 42px;
-    font-weight: 300;
-    letter-spacing: -1.5px;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .clock-ampm { font-size: 14px; color: var(--text-secondary); margin-top: 2px; }
-  .clock-date { font-size: 12px; color: var(--text-secondary); }
+.clock-time-wrap { text-align: right; flex-shrink: 0; }
+.clock-time {
+font-size: 42px;
+font-weight: 300;
+letter-spacing: -1.5px;
+line-height: 1;
+font-variant-numeric: tabular-nums;
+}
+.clock-ampm { font-size: 14px; color: var(–text-secondary); margin-top: 2px; }
+.clock-date { font-size: 12px; color: var(–text-secondary); }
 
-  /* Delete swipe */
-  .delete-btn {
-    display: none;
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    background: var(--danger);
-    color: white;
-    border: none;
-    padding: 0 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    align-items: center;
-  }
+/* Delete swipe */
+.delete-btn {
+display: none;
+position: absolute;
+right: 0; top: 0; bottom: 0;
+background: var(–danger);
+color: white;
+border: none;
+padding: 0 20px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+align-items: center;
+}
 
-  /* Analog mini */
-  .analog-clock { position: relative; width: 48px; height: 48px; flex-shrink: 0; }
-  .analog-face {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: var(--surface2);
-    border: 2px solid rgba(255,255,255,0.1);
-    position: relative;
-    overflow: hidden;
-  }
-  .hand {
-    position: absolute;
-    bottom: 50%;
-    left: 50%;
-    transform-origin: bottom center;
-    border-radius: 2px;
-  }
-  .hour-hand { width: 3px; height: 30%; background: white; margin-left: -1.5px; }
-  .min-hand { width: 2px; height: 40%; background: rgba(255,255,255,0.8); margin-left: -1px; }
-  .sec-hand { width: 1px; height: 42%; background: var(--accent); margin-left: -0.5px; }
-  .center-dot {
-    position: absolute;
-    width: 5px; height: 5px;
-    background: var(--accent);
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-  }
+/* Analog mini */
+.analog-clock { position: relative; width: 48px; height: 48px; flex-shrink: 0; }
+.analog-face {
+width: 100%;
+height: 100%;
+border-radius: 50%;
+background: var(–surface2);
+border: 2px solid rgba(255,255,255,0.1);
+position: relative;
+overflow: hidden;
+}
+.hand {
+position: absolute;
+bottom: 50%;
+left: 50%;
+transform-origin: bottom center;
+border-radius: 2px;
+}
+.hour-hand { width: 3px; height: 30%; background: white; margin-left: -1.5px; }
+.min-hand { width: 2px; height: 40%; background: rgba(255,255,255,0.8); margin-left: -1px; }
+.sec-hand { width: 1px; height: 42%; background: var(–accent); margin-left: -0.5px; }
+.center-dot {
+position: absolute;
+width: 5px; height: 5px;
+background: var(–accent);
+border-radius: 50%;
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+z-index: 2;
+}
 
-  /* Empty state */
-  .empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-secondary);
-  }
-  .empty-state .globe { font-size: 48px; margin-bottom: 12px; }
-  .empty-state p { font-size: 15px; line-height: 1.5; }
+/* Empty state */
+.empty-state {
+text-align: center;
+padding: 40px 20px;
+color: var(–text-secondary);
+}
+.empty-state .globe { font-size: 48px; margin-bottom: 12px; }
+.empty-state p { font-size: 15px; line-height: 1.5; }
 
-  /* My time card */
-  .my-time-card {
-    background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
-    border: 1px solid rgba(255,159,10,0.2);
-    border-radius: 20px;
-    padding: 20px;
-    margin-bottom: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  .my-time-card::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 100px; height: 100px;
-    background: radial-gradient(circle, rgba(255,159,10,0.1) 0%, transparent 70%);
-  }
-  .my-time-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
-  .my-time-display { font-size: 56px; font-weight: 200; letter-spacing: -3px; line-height: 1; font-variant-numeric: tabular-nums; }
-  .my-time-sub { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
-  .my-time-date { font-size: 14px; color: var(--text-secondary); }
-  .my-time-zone { font-size: 13px; color: var(--text-secondary); }
+/* My time card */
+.my-time-card {
+background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
+border: 1px solid rgba(255,159,10,0.2);
+border-radius: 20px;
+padding: 20px;
+margin-bottom: 24px;
+position: relative;
+overflow: hidden;
+}
+.my-time-card::before {
+content: ‘’;
+position: absolute;
+top: -30px; right: -30px;
+width: 100px; height: 100px;
+background: radial-gradient(circle, rgba(255,159,10,0.1) 0%, transparent 70%);
+}
+.my-time-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(–accent); font-weight: 600; margin-bottom: 6px; }
+.my-time-display { font-size: 56px; font-weight: 200; letter-spacing: -3px; line-height: 1; font-variant-numeric: tabular-nums; }
+.my-time-sub { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+.my-time-date { font-size: 14px; color: var(–text-secondary); }
+.my-time-zone { font-size: 13px; color: var(–text-secondary); }
 </style>
+
 </head>
 <body>
 <div class="phone">
@@ -318,6 +320,7 @@
   </div>
 
   <!-- Status Bar -->
+
   <div class="status-bar">
     <span class="status-time" id="statusTime">9:41</span>
     <div class="status-icons">
@@ -334,124 +337,396 @@
       <button class="edit-btn" onclick="toggleEdit()">Edit</button>
     </div>
 
-    <!-- My Time -->
-    <div class="my-time-card">
-      <div class="my-time-label">📍 My Time</div>
-      <div class="my-time-display" id="myTime">--:--</div>
-      <div class="my-time-sub">
-        <span class="my-time-date" id="myDate">--</span>
-        <span class="my-time-zone" id="myZone">--</span>
-      </div>
-    </div>
+```
+<!-- My Time -->
+<div class="my-time-card">
+  <div class="my-time-label">📍 My Time</div>
+  <div class="my-time-display" id="myTime">--:--</div>
+  <div class="my-time-sub">
+    <span class="my-time-date" id="myDate">--</span>
+    <span class="my-time-zone" id="myZone">--</span>
+  </div>
+</div>
 
-    <!-- Search -->
-    <div class="search-wrap">
-      <span class="search-icon">🔍</span>
-      <input class="search-input" type="text" placeholder="Search city or country..." id="searchInput" autocomplete="off">
-      <div class="search-results" id="searchResults"></div>
-    </div>
+<!-- Search -->
+<div class="search-wrap">
+  <span class="search-icon">🔍</span>
+  <input class="search-input" type="text" placeholder="Search city or country..." id="searchInput" autocomplete="off">
+  <div class="search-results" id="searchResults"></div>
+</div>
 
-    <!-- Clocks -->
-    <div id="clockSection">
-      <div class="section-label">World Clocks</div>
-      <div class="clock-list" id="clockList"></div>
-    </div>
+<!-- Clocks -->
+<div id="clockSection">
+  <div class="section-label">World Clocks</div>
+  <div class="clock-list" id="clockList"></div>
+</div>
+```
+
   </div>
 </div>
 
 <script>
 const CITIES = [
-  { city: "New York", country: "United States", tz: "America/New_York", flag: "🇺🇸" },
-  { city: "Los Angeles", country: "United States", tz: "America/Los_Angeles", flag: "🇺🇸" },
-  { city: "Chicago", country: "United States", tz: "America/Chicago", flag: "🇺🇸" },
-  { city: "London", country: "United Kingdom", tz: "Europe/London", flag: "🇬🇧" },
-  { city: "Paris", country: "France", tz: "Europe/Paris", flag: "🇫🇷" },
-  { city: "Berlin", country: "Germany", tz: "Europe/Berlin", flag: "🇩🇪" },
-  { city: "Madrid", country: "Spain", tz: "Europe/Madrid", flag: "🇪🇸" },
-  { city: "Rome", country: "Italy", tz: "Europe/Rome", flag: "🇮🇹" },
-  { city: "Amsterdam", country: "Netherlands", tz: "Europe/Amsterdam", flag: "🇳🇱" },
-  { city: "Stockholm", country: "Sweden", tz: "Europe/Stockholm", flag: "🇸🇪" },
-  { city: "Oslo", country: "Norway", tz: "Europe/Oslo", flag: "🇳🇴" },
-  { city: "Zurich", country: "Switzerland", tz: "Europe/Zurich", flag: "🇨🇭" },
-  { city: "Moscow", country: "Russia", tz: "Europe/Moscow", flag: "🇷🇺" },
-  { city: "Istanbul", country: "Turkey", tz: "Europe/Istanbul", flag: "🇹🇷" },
-  { city: "Dubai", country: "UAE", tz: "Asia/Dubai", flag: "🇦🇪" },
-  { city: "Riyadh", country: "Saudi Arabia", tz: "Asia/Riyadh", flag: "🇸🇦" },
-  { city: "Mumbai", country: "India", tz: "Asia/Kolkata", flag: "🇮🇳" },
-  { city: "Delhi", country: "India", tz: "Asia/Kolkata", flag: "🇮🇳" },
-  { city: "Bangalore", country: "India", tz: "Asia/Kolkata", flag: "🇮🇳" },
-  { city: "Colombo", country: "Sri Lanka", tz: "Asia/Colombo", flag: "🇱🇰" },
-  { city: "Dhaka", country: "Bangladesh", tz: "Asia/Dhaka", flag: "🇧🇩" },
-  { city: "Kathmandu", country: "Nepal", tz: "Asia/Kathmandu", flag: "🇳🇵" },
-  { city: "Karachi", country: "Pakistan", tz: "Asia/Karachi", flag: "🇵🇰" },
-  { city: "Kabul", country: "Afghanistan", tz: "Asia/Kabul", flag: "🇦🇫" },
-  { city: "Tashkent", country: "Uzbekistan", tz: "Asia/Tashkent", flag: "🇺🇿" },
-  { city: "Bangkok", country: "Thailand", tz: "Asia/Bangkok", flag: "🇹🇭" },
-  { city: "Jakarta", country: "Indonesia", tz: "Asia/Jakarta", flag: "🇮🇩" },
-  { city: "Singapore", country: "Singapore", tz: "Asia/Singapore", flag: "🇸🇬" },
-  { city: "Kuala Lumpur", country: "Malaysia", tz: "Asia/Kuala_Lumpur", flag: "🇲🇾" },
-  { city: "Manila", country: "Philippines", tz: "Asia/Manila", flag: "🇵🇭" },
-  { city: "Ho Chi Minh City", country: "Vietnam", tz: "Asia/Ho_Chi_Minh", flag: "🇻🇳" },
-  { city: "Yangon", country: "Myanmar", tz: "Asia/Yangon", flag: "🇲🇲" },
-  { city: "Phnom Penh", country: "Cambodia", tz: "Asia/Phnom_Penh", flag: "🇰🇭" },
-  { city: "Seoul", country: "South Korea", tz: "Asia/Seoul", flag: "🇰🇷" },
-  { city: "Tokyo", country: "Japan", tz: "Asia/Tokyo", flag: "🇯🇵" },
-  { city: "Osaka", country: "Japan", tz: "Asia/Tokyo", flag: "🇯🇵" },
-  { city: "Beijing", country: "China", tz: "Asia/Shanghai", flag: "🇨🇳" },
-  { city: "Shanghai", country: "China", tz: "Asia/Shanghai", flag: "🇨🇳" },
-  { city: "Hong Kong", country: "Hong Kong", tz: "Asia/Hong_Kong", flag: "🇭🇰" },
-  { city: "Taipei", country: "Taiwan", tz: "Asia/Taipei", flag: "🇹🇼" },
-  { city: "Ulaanbaatar", country: "Mongolia", tz: "Asia/Ulaanbaatar", flag: "🇲🇳" },
-  { city: "Sydney", country: "Australia", tz: "Australia/Sydney", flag: "🇦🇺" },
-  { city: "Melbourne", country: "Australia", tz: "Australia/Melbourne", flag: "🇦🇺" },
-  { city: "Brisbane", country: "Australia", tz: "Australia/Brisbane", flag: "🇦🇺" },
-  { city: "Perth", country: "Australia", tz: "Australia/Perth", flag: "🇦🇺" },
-  { city: "Auckland", country: "New Zealand", tz: "Pacific/Auckland", flag: "🇳🇿" },
-  { city: "Honolulu", country: "Hawaii, USA", tz: "Pacific/Honolulu", flag: "🇺🇸" },
-  { city: "Anchorage", country: "United States", tz: "America/Anchorage", flag: "🇺🇸" },
-  { city: "Toronto", country: "Canada", tz: "America/Toronto", flag: "🇨🇦" },
-  { city: "Vancouver", country: "Canada", tz: "America/Vancouver", flag: "🇨🇦" },
-  { city: "Mexico City", country: "Mexico", tz: "America/Mexico_City", flag: "🇲🇽" },
-  { city: "São Paulo", country: "Brazil", tz: "America/Sao_Paulo", flag: "🇧🇷" },
-  { city: "Buenos Aires", country: "Argentina", tz: "America/Argentina/Buenos_Aires", flag: "🇦🇷" },
-  { city: "Santiago", country: "Chile", tz: "America/Santiago", flag: "🇨🇱" },
-  { city: "Bogotá", country: "Colombia", tz: "America/Bogota", flag: "🇨🇴" },
-  { city: "Lima", country: "Peru", tz: "America/Lima", flag: "🇵🇪" },
-  { city: "Caracas", country: "Venezuela", tz: "America/Caracas", flag: "🇻🇪" },
-  { city: "Lagos", country: "Nigeria", tz: "Africa/Lagos", flag: "🇳🇬" },
-  { city: "Cairo", country: "Egypt", tz: "Africa/Cairo", flag: "🇪🇬" },
-  { city: "Nairobi", country: "Kenya", tz: "Africa/Nairobi", flag: "🇰🇪" },
-  { city: "Johannesburg", country: "South Africa", tz: "Africa/Johannesburg", flag: "🇿🇦" },
-  { city: "Casablanca", country: "Morocco", tz: "Africa/Casablanca", flag: "🇲🇦" },
-  { city: "Accra", country: "Ghana", tz: "Africa/Accra", flag: "🇬🇭" },
-  { city: "Addis Ababa", country: "Ethiopia", tz: "Africa/Addis_Ababa", flag: "🇪🇹" },
-  { city: "Reykjavik", country: "Iceland", tz: "Atlantic/Reykjavik", flag: "🇮🇸" },
-  { city: "Athens", country: "Greece", tz: "Europe/Athens", flag: "🇬🇷" },
-  { city: "Warsaw", country: "Poland", tz: "Europe/Warsaw", flag: "🇵🇱" },
-  { city: "Prague", country: "Czech Republic", tz: "Europe/Prague", flag: "🇨🇿" },
-  { city: "Budapest", country: "Hungary", tz: "Europe/Budapest", flag: "🇭🇺" },
-  { city: "Vienna", country: "Austria", tz: "Europe/Vienna", flag: "🇦🇹" },
-  { city: "Brussels", country: "Belgium", tz: "Europe/Brussels", flag: "🇧🇪" },
-  { city: "Lisbon", country: "Portugal", tz: "Europe/Lisbon", flag: "🇵🇹" },
-  { city: "Helsinki", country: "Finland", tz: "Europe/Helsinki", flag: "🇫🇮" },
-  { city: "Copenhagen", country: "Denmark", tz: "Europe/Copenhagen", flag: "🇩🇰" },
-  { city: "Kyiv", country: "Ukraine", tz: "Europe/Kyiv", flag: "🇺🇦" },
-  { city: "Bucharest", country: "Romania", tz: "Europe/Bucharest", flag: "🇷🇴" },
-  { city: "Sofia", country: "Bulgaria", tz: "Europe/Sofia", flag: "🇧🇬" },
-  { city: "Belgrade", country: "Serbia", tz: "Europe/Belgrade", flag: "🇷🇸" },
-  { city: "Baku", country: "Azerbaijan", tz: "Asia/Baku", flag: "🇦🇿" },
-  { city: "Tbilisi", country: "Georgia", tz: "Asia/Tbilisi", flag: "🇬🇪" },
-  { city: "Yerevan", country: "Armenia", tz: "Asia/Yerevan", flag: "🇦🇲" },
-  { city: "Tehran", country: "Iran", tz: "Asia/Tehran", flag: "🇮🇷" },
-  { city: "Baghdad", country: "Iraq", tz: "Asia/Baghdad", flag: "🇮🇶" },
-  { city: "Beirut", country: "Lebanon", tz: "Asia/Beirut", flag: "🇱🇧" },
-  { city: "Tel Aviv", country: "Israel", tz: "Asia/Jerusalem", flag: "🇮🇱" },
-  { city: "Amman", country: "Jordan", tz: "Asia/Amman", flag: "🇯🇴" },
-  { city: "Kuwait City", country: "Kuwait", tz: "Asia/Kuwait", flag: "🇰🇼" },
-  { city: "Muscat", country: "Oman", tz: "Asia/Muscat", flag: "🇴🇲" },
-  { city: "Doha", country: "Qatar", tz: "Asia/Qatar", flag: "🇶🇦" },
-  { city: "Manama", country: "Bahrain", tz: "Asia/Bahrain", flag: "🇧🇭" },
-  { city: "Islamabad", country: "Pakistan", tz: "Asia/Karachi", flag: "🇵🇰" },
+  // North America
+  {city:"New York",country:"United States",tz:"America/New_York",flag:"🇺🇸"},
+  {city:"Los Angeles",country:"United States",tz:"America/Los_Angeles",flag:"🇺🇸"},
+  {city:"Chicago",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"Houston",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"Phoenix",country:"United States",tz:"America/Phoenix",flag:"🇺🇸"},
+  {city:"Philadelphia",country:"United States",tz:"America/New_York",flag:"🇺🇸"},
+  {city:"San Antonio",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"San Diego",country:"United States",tz:"America/Los_Angeles",flag:"🇺🇸"},
+  {city:"Dallas",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"San Jose",country:"United States",tz:"America/Los_Angeles",flag:"🇺🇸"},
+  {city:"Austin",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"Jacksonville",country:"United States",tz:"America/New_York",flag:"🇺🇸"},
+  {city:"San Francisco",country:"United States",tz:"America/Los_Angeles",flag:"🇺🇸"},
+  {city:"Seattle",country:"United States",tz:"America/Los_Angeles",flag:"🇺🇸"},
+  {city:"Denver",country:"United States",tz:"America/Denver",flag:"🇺🇸"},
+  {city:"Nashville",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"Oklahoma City",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"El Paso",country:"United States",tz:"America/Denver",flag:"🇺🇸"},
+  {city:"Washington DC",country:"United States",tz:"America/New_York",flag:"🇺🇸"},
+  {city:"Las Vegas",country:"United States",tz:"America/Los_Angeles",flag:"🇺🇸"},
+  {city:"Portland",country:"United States",tz:"America/Los_Angeles",flag:"🇺🇸"},
+  {city:"Miami",country:"United States",tz:"America/New_York",flag:"🇺🇸"},
+  {city:"Atlanta",country:"United States",tz:"America/New_York",flag:"🇺🇸"},
+  {city:"Minneapolis",country:"United States",tz:"America/Chicago",flag:"🇺🇸"},
+  {city:"Boston",country:"United States",tz:"America/New_York",flag:"🇺🇸"},
+  {city:"Detroit",country:"United States",tz:"America/Detroit",flag:"🇺🇸"},
+  {city:"Honolulu",country:"United States",tz:"Pacific/Honolulu",flag:"🇺🇸"},
+  {city:"Anchorage",country:"United States",tz:"America/Anchorage",flag:"🇺🇸"},
+  {city:"Toronto",country:"Canada",tz:"America/Toronto",flag:"🇨🇦"},
+  {city:"Vancouver",country:"Canada",tz:"America/Vancouver",flag:"🇨🇦"},
+  {city:"Montreal",country:"Canada",tz:"America/Toronto",flag:"🇨🇦"},
+  {city:"Calgary",country:"Canada",tz:"America/Edmonton",flag:"🇨🇦"},
+  {city:"Edmonton",country:"Canada",tz:"America/Edmonton",flag:"🇨🇦"},
+  {city:"Ottawa",country:"Canada",tz:"America/Toronto",flag:"🇨🇦"},
+  {city:"Winnipeg",country:"Canada",tz:"America/Winnipeg",flag:"🇨🇦"},
+  {city:"Quebec City",country:"Canada",tz:"America/Toronto",flag:"🇨🇦"},
+  {city:"Halifax",country:"Canada",tz:"America/Halifax",flag:"🇨🇦"},
+  {city:"Mexico City",country:"Mexico",tz:"America/Mexico_City",flag:"🇲🇽"},
+  {city:"Guadalajara",country:"Mexico",tz:"America/Mexico_City",flag:"🇲🇽"},
+  {city:"Monterrey",country:"Mexico",tz:"America/Monterrey",flag:"🇲🇽"},
+  {city:"Tijuana",country:"Mexico",tz:"America/Tijuana",flag:"🇲🇽"},
+  {city:"Cancún",country:"Mexico",tz:"America/Cancun",flag:"🇲🇽"},
+  {city:"Havana",country:"Cuba",tz:"America/Havana",flag:"🇨🇺"},
+  {city:"Guatemala City",country:"Guatemala",tz:"America/Guatemala",flag:"🇬🇹"},
+  {city:"San Salvador",country:"El Salvador",tz:"America/El_Salvador",flag:"🇸🇻"},
+  {city:"Tegucigalpa",country:"Honduras",tz:"America/Tegucigalpa",flag:"🇭🇳"},
+  {city:"Managua",country:"Nicaragua",tz:"America/Managua",flag:"🇳🇮"},
+  {city:"San José",country:"Costa Rica",tz:"America/Costa_Rica",flag:"🇨🇷"},
+  {city:"Panama City",country:"Panama",tz:"America/Panama",flag:"🇵🇦"},
+  {city:"Santo Domingo",country:"Dominican Republic",tz:"America/Santo_Domingo",flag:"🇩🇴"},
+  {city:"Port-au-Prince",country:"Haiti",tz:"America/Port-au-Prince",flag:"🇭🇹"},
+  {city:"Kingston",country:"Jamaica",tz:"America/Jamaica",flag:"🇯🇲"},
+  {city:"San Juan",country:"Puerto Rico",tz:"America/Puerto_Rico",flag:"🇵🇷"},
+  // South America
+  {city:"São Paulo",country:"Brazil",tz:"America/Sao_Paulo",flag:"🇧🇷"},
+  {city:"Rio de Janeiro",country:"Brazil",tz:"America/Sao_Paulo",flag:"🇧🇷"},
+  {city:"Brasília",country:"Brazil",tz:"America/Sao_Paulo",flag:"🇧🇷"},
+  {city:"Salvador",country:"Brazil",tz:"America/Bahia",flag:"🇧🇷"},
+  {city:"Fortaleza",country:"Brazil",tz:"America/Fortaleza",flag:"🇧🇷"},
+  {city:"Belo Horizonte",country:"Brazil",tz:"America/Sao_Paulo",flag:"🇧🇷"},
+  {city:"Manaus",country:"Brazil",tz:"America/Manaus",flag:"🇧🇷"},
+  {city:"Recife",country:"Brazil",tz:"America/Recife",flag:"🇧🇷"},
+  {city:"Buenos Aires",country:"Argentina",tz:"America/Argentina/Buenos_Aires",flag:"🇦🇷"},
+  {city:"Córdoba",country:"Argentina",tz:"America/Argentina/Cordoba",flag:"🇦🇷"},
+  {city:"Rosario",country:"Argentina",tz:"America/Argentina/Buenos_Aires",flag:"🇦🇷"},
+  {city:"Mendoza",country:"Argentina",tz:"America/Argentina/Mendoza",flag:"🇦🇷"},
+  {city:"Santiago",country:"Chile",tz:"America/Santiago",flag:"🇨🇱"},
+  {city:"Bogotá",country:"Colombia",tz:"America/Bogota",flag:"🇨🇴"},
+  {city:"Medellín",country:"Colombia",tz:"America/Bogota",flag:"🇨🇴"},
+  {city:"Cali",country:"Colombia",tz:"America/Bogota",flag:"🇨🇴"},
+  {city:"Lima",country:"Peru",tz:"America/Lima",flag:"🇵🇪"},
+  {city:"Caracas",country:"Venezuela",tz:"America/Caracas",flag:"🇻🇪"},
+  {city:"Quito",country:"Ecuador",tz:"America/Guayaquil",flag:"🇪🇨"},
+  {city:"Guayaquil",country:"Ecuador",tz:"America/Guayaquil",flag:"🇪🇨"},
+  {city:"La Paz",country:"Bolivia",tz:"America/La_Paz",flag:"🇧🇴"},
+  {city:"Santa Cruz",country:"Bolivia",tz:"America/La_Paz",flag:"🇧🇴"},
+  {city:"Asunción",country:"Paraguay",tz:"America/Asuncion",flag:"🇵🇾"},
+  {city:"Montevideo",country:"Uruguay",tz:"America/Montevideo",flag:"🇺🇾"},
+  {city:"Georgetown",country:"Guyana",tz:"America/Guyana",flag:"🇬🇾"},
+  {city:"Paramaribo",country:"Suriname",tz:"America/Paramaribo",flag:"🇸🇷"},
+  // Europe
+  {city:"London",country:"United Kingdom",tz:"Europe/London",flag:"🇬🇧"},
+  {city:"Birmingham",country:"United Kingdom",tz:"Europe/London",flag:"🇬🇧"},
+  {city:"Manchester",country:"United Kingdom",tz:"Europe/London",flag:"🇬🇧"},
+  {city:"Glasgow",country:"United Kingdom",tz:"Europe/London",flag:"🇬🇧"},
+  {city:"Edinburgh",country:"United Kingdom",tz:"Europe/London",flag:"🇬🇧"},
+  {city:"Dublin",country:"Ireland",tz:"Europe/Dublin",flag:"🇮🇪"},
+  {city:"Paris",country:"France",tz:"Europe/Paris",flag:"🇫🇷"},
+  {city:"Lyon",country:"France",tz:"Europe/Paris",flag:"🇫🇷"},
+  {city:"Marseille",country:"France",tz:"Europe/Paris",flag:"🇫🇷"},
+  {city:"Berlin",country:"Germany",tz:"Europe/Berlin",flag:"🇩🇪"},
+  {city:"Hamburg",country:"Germany",tz:"Europe/Berlin",flag:"🇩🇪"},
+  {city:"Munich",country:"Germany",tz:"Europe/Berlin",flag:"🇩🇪"},
+  {city:"Frankfurt",country:"Germany",tz:"Europe/Berlin",flag:"🇩🇪"},
+  {city:"Cologne",country:"Germany",tz:"Europe/Berlin",flag:"🇩🇪"},
+  {city:"Madrid",country:"Spain",tz:"Europe/Madrid",flag:"🇪🇸"},
+  {city:"Barcelona",country:"Spain",tz:"Europe/Madrid",flag:"🇪🇸"},
+  {city:"Seville",country:"Spain",tz:"Europe/Madrid",flag:"🇪🇸"},
+  {city:"Valencia",country:"Spain",tz:"Europe/Madrid",flag:"🇪🇸"},
+  {city:"Rome",country:"Italy",tz:"Europe/Rome",flag:"🇮🇹"},
+  {city:"Milan",country:"Italy",tz:"Europe/Rome",flag:"🇮🇹"},
+  {city:"Naples",country:"Italy",tz:"Europe/Rome",flag:"🇮🇹"},
+  {city:"Turin",country:"Italy",tz:"Europe/Rome",flag:"🇮🇹"},
+  {city:"Amsterdam",country:"Netherlands",tz:"Europe/Amsterdam",flag:"🇳🇱"},
+  {city:"Rotterdam",country:"Netherlands",tz:"Europe/Amsterdam",flag:"🇳🇱"},
+  {city:"Brussels",country:"Belgium",tz:"Europe/Brussels",flag:"🇧🇪"},
+  {city:"Antwerp",country:"Belgium",tz:"Europe/Brussels",flag:"🇧🇪"},
+  {city:"Zurich",country:"Switzerland",tz:"Europe/Zurich",flag:"🇨🇭"},
+  {city:"Geneva",country:"Switzerland",tz:"Europe/Zurich",flag:"🇨🇭"},
+  {city:"Bern",country:"Switzerland",tz:"Europe/Zurich",flag:"🇨🇭"},
+  {city:"Vienna",country:"Austria",tz:"Europe/Vienna",flag:"🇦🇹"},
+  {city:"Lisbon",country:"Portugal",tz:"Europe/Lisbon",flag:"🇵🇹"},
+  {city:"Porto",country:"Portugal",tz:"Europe/Lisbon",flag:"🇵🇹"},
+  {city:"Stockholm",country:"Sweden",tz:"Europe/Stockholm",flag:"🇸🇪"},
+  {city:"Gothenburg",country:"Sweden",tz:"Europe/Stockholm",flag:"🇸🇪"},
+  {city:"Malmö",country:"Sweden",tz:"Europe/Stockholm",flag:"🇸🇪"},
+  {city:"Oslo",country:"Norway",tz:"Europe/Oslo",flag:"🇳🇴"},
+  {city:"Bergen",country:"Norway",tz:"Europe/Oslo",flag:"🇳🇴"},
+  {city:"Copenhagen",country:"Denmark",tz:"Europe/Copenhagen",flag:"🇩🇰"},
+  {city:"Helsinki",country:"Finland",tz:"Europe/Helsinki",flag:"🇫🇮"},
+  {city:"Tampere",country:"Finland",tz:"Europe/Helsinki",flag:"🇫🇮"},
+  {city:"Reykjavik",country:"Iceland",tz:"Atlantic/Reykjavik",flag:"🇮🇸"},
+  {city:"Warsaw",country:"Poland",tz:"Europe/Warsaw",flag:"🇵🇱"},
+  {city:"Kraków",country:"Poland",tz:"Europe/Warsaw",flag:"🇵🇱"},
+  {city:"Łódź",country:"Poland",tz:"Europe/Warsaw",flag:"🇵🇱"},
+  {city:"Prague",country:"Czech Republic",tz:"Europe/Prague",flag:"🇨🇿"},
+  {city:"Brno",country:"Czech Republic",tz:"Europe/Prague",flag:"🇨🇿"},
+  {city:"Budapest",country:"Hungary",tz:"Europe/Budapest",flag:"🇭🇺"},
+  {city:"Bucharest",country:"Romania",tz:"Europe/Bucharest",flag:"🇷🇴"},
+  {city:"Cluj-Napoca",country:"Romania",tz:"Europe/Bucharest",flag:"🇷🇴"},
+  {city:"Sofia",country:"Bulgaria",tz:"Europe/Sofia",flag:"🇧🇬"},
+  {city:"Athens",country:"Greece",tz:"Europe/Athens",flag:"🇬🇷"},
+  {city:"Thessaloniki",country:"Greece",tz:"Europe/Athens",flag:"🇬🇷"},
+  {city:"Belgrade",country:"Serbia",tz:"Europe/Belgrade",flag:"🇷🇸"},
+  {city:"Zagreb",country:"Croatia",tz:"Europe/Zagreb",flag:"🇭🇷"},
+  {city:"Ljubljana",country:"Slovenia",tz:"Europe/Ljubljana",flag:"🇸🇮"},
+  {city:"Sarajevo",country:"Bosnia",tz:"Europe/Sarajevo",flag:"🇧🇦"},
+  {city:"Skopje",country:"North Macedonia",tz:"Europe/Skopje",flag:"🇲🇰"},
+  {city:"Tirana",country:"Albania",tz:"Europe/Tirane",flag:"🇦🇱"},
+  {city:"Podgorica",country:"Montenegro",tz:"Europe/Podgorica",flag:"🇲🇪"},
+  {city:"Pristina",country:"Kosovo",tz:"Europe/Belgrade",flag:"🇽🇰"},
+  {city:"Kyiv",country:"Ukraine",tz:"Europe/Kyiv",flag:"🇺🇦"},
+  {city:"Kharkiv",country:"Ukraine",tz:"Europe/Kyiv",flag:"🇺🇦"},
+  {city:"Odesa",country:"Ukraine",tz:"Europe/Kyiv",flag:"🇺🇦"},
+  {city:"Moscow",country:"Russia",tz:"Europe/Moscow",flag:"🇷🇺"},
+  {city:"Saint Petersburg",country:"Russia",tz:"Europe/Moscow",flag:"🇷🇺"},
+  {city:"Novosibirsk",country:"Russia",tz:"Asia/Novosibirsk",flag:"🇷🇺"},
+  {city:"Yekaterinburg",country:"Russia",tz:"Asia/Yekaterinburg",flag:"🇷🇺"},
+  {city:"Omsk",country:"Russia",tz:"Asia/Omsk",flag:"🇷🇺"},
+  {city:"Kazan",country:"Russia",tz:"Europe/Moscow",flag:"🇷🇺"},
+  {city:"Chelyabinsk",country:"Russia",tz:"Asia/Yekaterinburg",flag:"🇷🇺"},
+  {city:"Krasnoyarsk",country:"Russia",tz:"Asia/Krasnoyarsk",flag:"🇷🇺"},
+  {city:"Irkutsk",country:"Russia",tz:"Asia/Irkutsk",flag:"🇷🇺"},
+  {city:"Vladivostok",country:"Russia",tz:"Asia/Vladivostok",flag:"🇷🇺"},
+  {city:"Minsk",country:"Belarus",tz:"Europe/Minsk",flag:"🇧🇾"},
+  {city:"Chisinau",country:"Moldova",tz:"Europe/Chisinau",flag:"🇲🇩"},
+  {city:"Riga",country:"Latvia",tz:"Europe/Riga",flag:"🇱🇻"},
+  {city:"Tallinn",country:"Estonia",tz:"Europe/Tallinn",flag:"🇪🇪"},
+  {city:"Vilnius",country:"Lithuania",tz:"Europe/Vilnius",flag:"🇱🇹"},
+  {city:"Luxembourg",country:"Luxembourg",tz:"Europe/Luxembourg",flag:"🇱🇺"},
+  {city:"Valletta",country:"Malta",tz:"Europe/Malta",flag:"🇲🇹"},
+  {city:"Nicosia",country:"Cyprus",tz:"Asia/Nicosia",flag:"🇨🇾"},
+  // Middle East
+  {city:"Istanbul",country:"Turkey",tz:"Europe/Istanbul",flag:"🇹🇷"},
+  {city:"Ankara",country:"Turkey",tz:"Europe/Istanbul",flag:"🇹🇷"},
+  {city:"Izmir",country:"Turkey",tz:"Europe/Istanbul",flag:"🇹🇷"},
+  {city:"Dubai",country:"UAE",tz:"Asia/Dubai",flag:"🇦🇪"},
+  {city:"Abu Dhabi",country:"UAE",tz:"Asia/Dubai",flag:"🇦🇪"},
+  {city:"Sharjah",country:"UAE",tz:"Asia/Dubai",flag:"🇦🇪"},
+  {city:"Riyadh",country:"Saudi Arabia",tz:"Asia/Riyadh",flag:"🇸🇦"},
+  {city:"Jeddah",country:"Saudi Arabia",tz:"Asia/Riyadh",flag:"🇸🇦"},
+  {city:"Mecca",country:"Saudi Arabia",tz:"Asia/Riyadh",flag:"🇸🇦"},
+  {city:"Medina",country:"Saudi Arabia",tz:"Asia/Riyadh",flag:"🇸🇦"},
+  {city:"Doha",country:"Qatar",tz:"Asia/Qatar",flag:"🇶🇦"},
+  {city:"Kuwait City",country:"Kuwait",tz:"Asia/Kuwait",flag:"🇰🇼"},
+  {city:"Manama",country:"Bahrain",tz:"Asia/Bahrain",flag:"🇧🇭"},
+  {city:"Muscat",country:"Oman",tz:"Asia/Muscat",flag:"🇴🇲"},
+  {city:"Sana'a",country:"Yemen",tz:"Asia/Aden",flag:"🇾🇪"},
+  {city:"Tehran",country:"Iran",tz:"Asia/Tehran",flag:"🇮🇷"},
+  {city:"Mashhad",country:"Iran",tz:"Asia/Tehran",flag:"🇮🇷"},
+  {city:"Isfahan",country:"Iran",tz:"Asia/Tehran",flag:"🇮🇷"},
+  {city:"Baghdad",country:"Iraq",tz:"Asia/Baghdad",flag:"🇮🇶"},
+  {city:"Basra",country:"Iraq",tz:"Asia/Baghdad",flag:"🇮🇶"},
+  {city:"Beirut",country:"Lebanon",tz:"Asia/Beirut",flag:"🇱🇧"},
+  {city:"Damascus",country:"Syria",tz:"Asia/Damascus",flag:"🇸🇾"},
+  {city:"Amman",country:"Jordan",tz:"Asia/Amman",flag:"🇯🇴"},
+  {city:"Tel Aviv",country:"Israel",tz:"Asia/Jerusalem",flag:"🇮🇱"},
+  {city:"Jerusalem",country:"Israel",tz:"Asia/Jerusalem",flag:"🇮🇱"},
+  {city:"Haifa",country:"Israel",tz:"Asia/Jerusalem",flag:"🇮🇱"},
+  {city:"Gaza",country:"Palestine",tz:"Asia/Gaza",flag:"🇵🇸"},
+  {city:"Baku",country:"Azerbaijan",tz:"Asia/Baku",flag:"🇦🇿"},
+  {city:"Tbilisi",country:"Georgia",tz:"Asia/Tbilisi",flag:"🇬🇪"},
+  {city:"Yerevan",country:"Armenia",tz:"Asia/Yerevan",flag:"🇦🇲"},
+  // Central Asia
+  {city:"Tashkent",country:"Uzbekistan",tz:"Asia/Tashkent",flag:"🇺🇿"},
+  {city:"Samarkand",country:"Uzbekistan",tz:"Asia/Samarkand",flag:"🇺🇿"},
+  {city:"Almaty",country:"Kazakhstan",tz:"Asia/Almaty",flag:"🇰🇿"},
+  {city:"Astana",country:"Kazakhstan",tz:"Asia/Almaty",flag:"🇰🇿"},
+  {city:"Bishkek",country:"Kyrgyzstan",tz:"Asia/Bishkek",flag:"🇰🇬"},
+  {city:"Dushanbe",country:"Tajikistan",tz:"Asia/Dushanbe",flag:"🇹🇯"},
+  {city:"Ashgabat",country:"Turkmenistan",tz:"Asia/Ashgabat",flag:"🇹🇲"},
+  {city:"Kabul",country:"Afghanistan",tz:"Asia/Kabul",flag:"🇦🇫"},
+  // South Asia
+  {city:"Karachi",country:"Pakistan",tz:"Asia/Karachi",flag:"🇵🇰"},
+  {city:"Lahore",country:"Pakistan",tz:"Asia/Karachi",flag:"🇵🇰"},
+  {city:"Islamabad",country:"Pakistan",tz:"Asia/Karachi",flag:"🇵🇰"},
+  {city:"Rawalpindi",country:"Pakistan",tz:"Asia/Karachi",flag:"🇵🇰"},
+  {city:"Faisalabad",country:"Pakistan",tz:"Asia/Karachi",flag:"🇵🇰"},
+  {city:"Peshawar",country:"Pakistan",tz:"Asia/Karachi",flag:"🇵🇰"},
+  {city:"Mumbai",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Delhi",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Bangalore",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Hyderabad",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Ahmedabad",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Chennai",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Kolkata",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Surat",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Pune",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Jaipur",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Lucknow",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Kanpur",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Nagpur",country:"India",tz:"Asia/Kolkata",flag:"🇮🇳"},
+  {city:"Kathmandu",country:"Nepal",tz:"Asia/Kathmandu",flag:"🇳🇵"},
+  {city:"Dhaka",country:"Bangladesh",tz:"Asia/Dhaka",flag:"🇧🇩"},
+  {city:"Chittagong",country:"Bangladesh",tz:"Asia/Dhaka",flag:"🇧🇩"},
+  {city:"Colombo",country:"Sri Lanka",tz:"Asia/Colombo",flag:"🇱🇰"},
+  {city:"Malé",country:"Maldives",tz:"Indian/Maldives",flag:"🇲🇻"},
+  {city:"Thimphu",country:"Bhutan",tz:"Asia/Thimphu",flag:"🇧🇹"},
+  {city:"Yangon",country:"Myanmar",tz:"Asia/Yangon",flag:"🇲🇲"},
+  {city:"Mandalay",country:"Myanmar",tz:"Asia/Yangon",flag:"🇲🇲"},
+  // Southeast Asia
+  {city:"Bangkok",country:"Thailand",tz:"Asia/Bangkok",flag:"🇹🇭"},
+  {city:"Chiang Mai",country:"Thailand",tz:"Asia/Bangkok",flag:"🇹🇭"},
+  {city:"Phuket",country:"Thailand",tz:"Asia/Bangkok",flag:"🇹🇭"},
+  {city:"Ho Chi Minh City",country:"Vietnam",tz:"Asia/Ho_Chi_Minh",flag:"🇻🇳"},
+  {city:"Hanoi",country:"Vietnam",tz:"Asia/Bangkok",flag:"🇻🇳"},
+  {city:"Da Nang",country:"Vietnam",tz:"Asia/Bangkok",flag:"🇻🇳"},
+  {city:"Phnom Penh",country:"Cambodia",tz:"Asia/Phnom_Penh",flag:"🇰🇭"},
+  {city:"Vientiane",country:"Laos",tz:"Asia/Vientiane",flag:"🇱🇦"},
+  {city:"Singapore",country:"Singapore",tz:"Asia/Singapore",flag:"🇸🇬"},
+  {city:"Kuala Lumpur",country:"Malaysia",tz:"Asia/Kuala_Lumpur",flag:"🇲🇾"},
+  {city:"George Town",country:"Malaysia",tz:"Asia/Kuala_Lumpur",flag:"🇲🇾"},
+  {city:"Johor Bahru",country:"Malaysia",tz:"Asia/Kuala_Lumpur",flag:"🇲🇾"},
+  {city:"Bandar Seri Begawan",country:"Brunei",tz:"Asia/Brunei",flag:"🇧🇳"},
+  {city:"Jakarta",country:"Indonesia",tz:"Asia/Jakarta",flag:"🇮🇩"},
+  {city:"Surabaya",country:"Indonesia",tz:"Asia/Jakarta",flag:"🇮🇩"},
+  {city:"Bandung",country:"Indonesia",tz:"Asia/Jakarta",flag:"🇮🇩"},
+  {city:"Medan",country:"Indonesia",tz:"Asia/Jakarta",flag:"🇮🇩"},
+  {city:"Bali",country:"Indonesia",tz:"Asia/Makassar",flag:"🇮🇩"},
+  {city:"Makassar",country:"Indonesia",tz:"Asia/Makassar",flag:"🇮🇩"},
+  {city:"Jayapura",country:"Indonesia",tz:"Asia/Jayapura",flag:"🇮🇩"},
+  {city:"Manila",country:"Philippines",tz:"Asia/Manila",flag:"🇵🇭"},
+  {city:"Quezon City",country:"Philippines",tz:"Asia/Manila",flag:"🇵🇭"},
+  {city:"Cebu",country:"Philippines",tz:"Asia/Manila",flag:"🇵🇭"},
+  {city:"Davao",country:"Philippines",tz:"Asia/Manila",flag:"🇵🇭"},
+  {city:"Dili",country:"Timor-Leste",tz:"Asia/Dili",flag:"🇹🇱"},
+  // East Asia
+  {city:"Beijing",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Shanghai",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Guangzhou",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Shenzhen",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Chengdu",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Tianjin",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Wuhan",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Xi'an",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Hangzhou",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Nanjing",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Chongqing",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Kunming",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Harbin",country:"China",tz:"Asia/Shanghai",flag:"🇨🇳"},
+  {city:"Urumqi",country:"China",tz:"Asia/Urumqi",flag:"🇨🇳"},
+  {city:"Hong Kong",country:"Hong Kong",tz:"Asia/Hong_Kong",flag:"🇭🇰"},
+  {city:"Macau",country:"Macau",tz:"Asia/Macau",flag:"🇲🇴"},
+  {city:"Taipei",country:"Taiwan",tz:"Asia/Taipei",flag:"🇹🇼"},
+  {city:"Kaohsiung",country:"Taiwan",tz:"Asia/Taipei",flag:"🇹🇼"},
+  {city:"Tokyo",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Osaka",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Yokohama",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Nagoya",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Sapporo",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Fukuoka",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Kyoto",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Kobe",country:"Japan",tz:"Asia/Tokyo",flag:"🇯🇵"},
+  {city:"Seoul",country:"South Korea",tz:"Asia/Seoul",flag:"🇰🇷"},
+  {city:"Busan",country:"South Korea",tz:"Asia/Seoul",flag:"🇰🇷"},
+  {city:"Incheon",country:"South Korea",tz:"Asia/Seoul",flag:"🇰🇷"},
+  {city:"Pyongyang",country:"North Korea",tz:"Asia/Pyongyang",flag:"🇰🇵"},
+  {city:"Ulaanbaatar",country:"Mongolia",tz:"Asia/Ulaanbaatar",flag:"🇲🇳"},
+  // Africa
+  {city:"Lagos",country:"Nigeria",tz:"Africa/Lagos",flag:"🇳🇬"},
+  {city:"Kano",country:"Nigeria",tz:"Africa/Lagos",flag:"🇳🇬"},
+  {city:"Ibadan",country:"Nigeria",tz:"Africa/Lagos",flag:"🇳🇬"},
+  {city:"Abuja",country:"Nigeria",tz:"Africa/Lagos",flag:"🇳🇬"},
+  {city:"Cairo",country:"Egypt",tz:"Africa/Cairo",flag:"🇪🇬"},
+  {city:"Alexandria",country:"Egypt",tz:"Africa/Cairo",flag:"🇪🇬"},
+  {city:"Kinshasa",country:"DR Congo",tz:"Africa/Kinshasa",flag:"🇨🇩"},
+  {city:"Lubumbashi",country:"DR Congo",tz:"Africa/Lubumbashi",flag:"🇨🇩"},
+  {city:"Johannesburg",country:"South Africa",tz:"Africa/Johannesburg",flag:"🇿🇦"},
+  {city:"Cape Town",country:"South Africa",tz:"Africa/Johannesburg",flag:"🇿🇦"},
+  {city:"Durban",country:"South Africa",tz:"Africa/Johannesburg",flag:"🇿🇦"},
+  {city:"Pretoria",country:"South Africa",tz:"Africa/Johannesburg",flag:"🇿🇦"},
+  {city:"Nairobi",country:"Kenya",tz:"Africa/Nairobi",flag:"🇰🇪"},
+  {city:"Mombasa",country:"Kenya",tz:"Africa/Nairobi",flag:"🇰🇪"},
+  {city:"Addis Ababa",country:"Ethiopia",tz:"Africa/Addis_Ababa",flag:"🇪🇹"},
+  {city:"Dar es Salaam",country:"Tanzania",tz:"Africa/Dar_es_Salaam",flag:"🇹🇿"},
+  {city:"Dodoma",country:"Tanzania",tz:"Africa/Dar_es_Salaam",flag:"🇹🇿"},
+  {city:"Kampala",country:"Uganda",tz:"Africa/Kampala",flag:"🇺🇬"},
+  {city:"Kigali",country:"Rwanda",tz:"Africa/Kigali",flag:"🇷🇼"},
+  {city:"Lusaka",country:"Zambia",tz:"Africa/Lusaka",flag:"🇿🇲"},
+  {city:"Harare",country:"Zimbabwe",tz:"Africa/Harare",flag:"🇿🇼"},
+  {city:"Maputo",country:"Mozambique",tz:"Africa/Maputo",flag:"🇲🇿"},
+  {city:"Antananarivo",country:"Madagascar",tz:"Indian/Antananarivo",flag:"🇲🇬"},
+  {city:"Casablanca",country:"Morocco",tz:"Africa/Casablanca",flag:"🇲🇦"},
+  {city:"Rabat",country:"Morocco",tz:"Africa/Casablanca",flag:"🇲🇦"},
+  {city:"Marrakesh",country:"Morocco",tz:"Africa/Casablanca",flag:"🇲🇦"},
+  {city:"Algiers",country:"Algeria",tz:"Africa/Algiers",flag:"🇩🇿"},
+  {city:"Tunis",country:"Tunisia",tz:"Africa/Tunis",flag:"🇹🇳"},
+  {city:"Tripoli",country:"Libya",tz:"Africa/Tripoli",flag:"🇱🇾"},
+  {city:"Khartoum",country:"Sudan",tz:"Africa/Khartoum",flag:"🇸🇩"},
+  {city:"Accra",country:"Ghana",tz:"Africa/Accra",flag:"🇬🇭"},
+  {city:"Abidjan",country:"Ivory Coast",tz:"Africa/Abidjan",flag:"🇨🇮"},
+  {city:"Dakar",country:"Senegal",tz:"Africa/Dakar",flag:"🇸🇳"},
+  {city:"Conakry",country:"Guinea",tz:"Africa/Conakry",flag:"🇬🇳"},
+  {city:"Bamako",country:"Mali",tz:"Africa/Bamako",flag:"🇲🇱"},
+  {city:"Ouagadougou",country:"Burkina Faso",tz:"Africa/Ouagadougou",flag:"🇧🇫"},
+  {city:"Niamey",country:"Niger",tz:"Africa/Niamey",flag:"🇳🇪"},
+  {city:"Ndjamena",country:"Chad",tz:"Africa/Ndjamena",flag:"🇹🇩"},
+  {city:"Yaoundé",country:"Cameroon",tz:"Africa/Douala",flag:"🇨🇲"},
+  {city:"Douala",country:"Cameroon",tz:"Africa/Douala",flag:"🇨🇲"},
+  {city:"Luanda",country:"Angola",tz:"Africa/Luanda",flag:"🇦🇴"},
+  {city:"Mogadishu",country:"Somalia",tz:"Africa/Mogadishu",flag:"🇸🇴"},
+  {city:"Djibouti",country:"Djibouti",tz:"Africa/Djibouti",flag:"🇩🇯"},
+  {city:"Asmara",country:"Eritrea",tz:"Africa/Asmara",flag:"🇪🇷"},
+  {city:"Lilongwe",country:"Malawi",tz:"Africa/Blantyre",flag:"🇲🇼"},
+  {city:"Gaborone",country:"Botswana",tz:"Africa/Gaborone",flag:"🇧🇼"},
+  {city:"Windhoek",country:"Namibia",tz:"Africa/Windhoek",flag:"🇳🇦"},
+  {city:"Mbabane",country:"Eswatini",tz:"Africa/Mbabane",flag:"🇸🇿"},
+  {city:"Maseru",country:"Lesotho",tz:"Africa/Maseru",flag:"🇱🇸"},
+  // Oceania
+  {city:"Sydney",country:"Australia",tz:"Australia/Sydney",flag:"🇦🇺"},
+  {city:"Melbourne",country:"Australia",tz:"Australia/Melbourne",flag:"🇦🇺"},
+  {city:"Brisbane",country:"Australia",tz:"Australia/Brisbane",flag:"🇦🇺"},
+  {city:"Perth",country:"Australia",tz:"Australia/Perth",flag:"🇦🇺"},
+  {city:"Adelaide",country:"Australia",tz:"Australia/Adelaide",flag:"🇦🇺"},
+  {city:"Canberra",country:"Australia",tz:"Australia/Sydney",flag:"🇦🇺"},
+  {city:"Darwin",country:"Australia",tz:"Australia/Darwin",flag:"🇦🇺"},
+  {city:"Hobart",country:"Australia",tz:"Australia/Hobart",flag:"🇦🇺"},
+  {city:"Auckland",country:"New Zealand",tz:"Pacific/Auckland",flag:"🇳🇿"},
+  {city:"Wellington",country:"New Zealand",tz:"Pacific/Auckland",flag:"🇳🇿"},
+  {city:"Christchurch",country:"New Zealand",tz:"Pacific/Auckland",flag:"🇳🇿"},
+  {city:"Port Moresby",country:"Papua New Guinea",tz:"Pacific/Port_Moresby",flag:"🇵🇬"},
+  {city:"Suva",country:"Fiji",tz:"Pacific/Fiji",flag:"🇫🇯"},
+  {city:"Honiara",country:"Solomon Islands",tz:"Pacific/Guadalcanal",flag:"🇸🇧"},
+  {city:"Port Vila",country:"Vanuatu",tz:"Pacific/Efate",flag:"🇻🇺"},
+  {city:"Nuku'alofa",country:"Tonga",tz:"Pacific/Tongatapu",flag:"🇹🇴"},
+  {city:"Apia",country:"Samoa",tz:"Pacific/Apia",flag:"🇼🇸"},
+  {city:"Pago Pago",country:"American Samoa",tz:"Pacific/Pago_Pago",flag:"🇦🇸"},
+  {city:"Funafuti",country:"Tuvalu",tz:"Pacific/Funafuti",flag:"🇹🇻"},
+  {city:"Tarawa",country:"Kiribati",tz:"Pacific/Tarawa",flag:"🇰🇮"},
 ];
 
 let savedClocks = JSON.parse(localStorage.getItem('worldClocks') || '[]');
@@ -470,10 +745,8 @@ function getTimeInZone(tz) {
 
 function getLocalOffset(tz) {
   const now = new Date();
-  const local = now;
   const remote = new Date(now.toLocaleString('en-US', { timeZone: tz }));
-  const diff = (remote - local) / 1000 / 3600;
-  return diff;
+  return (remote - now) / 1000 / 3600;
 }
 
 function formatDiff(diff) {
@@ -484,9 +757,7 @@ function formatDiff(diff) {
   let s = '';
   if (h) s += `${h}h`;
   if (m) s += `${h ? ' ' : ''}${m}m`;
-  return diff > 0
-    ? { text: `+${s} ahead`, cls: "ahead" }
-    : { text: `${s} behind`, cls: "behind" };
+  return diff > 0 ? { text: `+${s} ahead`, cls: "ahead" } : { text: `${s} behind`, cls: "behind" };
 }
 
 const DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -546,17 +817,13 @@ function updateClocks() {
     const h12 = h % 12 || 12;
     const mStr = String(m).padStart(2, '0');
     const diff = formatDiff(getLocalOffset(tz));
-
     card.querySelector('.clock-time').textContent = `${h12}:${mStr}`;
     card.querySelector('.clock-ampm').textContent = h >= 12 ? 'PM' : 'AM';
-    card.querySelector('.clock-date').textContent =
-      `${DAYS_SHORT[t.getDay()]}, ${MONTHS_SHORT[t.getMonth()]} ${t.getDate()}`;
+    card.querySelector('.clock-date').textContent = `${DAYS_SHORT[t.getDay()]}, ${MONTHS_SHORT[t.getMonth()]} ${t.getDate()}`;
     const diffEl = card.querySelector('.clock-diff');
     diffEl.textContent = diff.text;
     diffEl.className = `clock-diff ${diff.cls}`;
-
-    const hDeg = (h % 12) * 30 + m * 0.5;
-    card.querySelector('.hour-hand').style.transform = `rotate(${hDeg}deg)`;
+    card.querySelector('.hour-hand').style.transform = `rotate(${(h % 12) * 30 + m * 0.5}deg)`;
     card.querySelector('.min-hand').style.transform = `rotate(${m * 6}deg)`;
     card.querySelector('.sec-hand').style.transform = `rotate(${s * 6}deg)`;
   });
@@ -568,110 +835,58 @@ function updateMyTime() {
   const h12 = h % 12 || 12;
   const mStr = String(m).padStart(2, '0');
   document.getElementById('myTime').textContent = `${h12}:${mStr}`;
-  document.getElementById('myDate').textContent =
-    `${DAYS_LONG[now.getDay()]}, ${MONTHS_LONG[now.getMonth()]} ${now.getDate()}`;
-  document.getElementById('myZone').textContent =
-    Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ');
+  document.getElementById('myDate').textContent = `${DAYS_LONG[now.getDay()]}, ${MONTHS_LONG[now.getMonth()]} ${now.getDate()}`;
+  document.getElementById('myZone').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ');
   document.getElementById('statusTime').textContent = `${h12}:${mStr}`;
 }
 
-function tick() {
-  updateMyTime();
-  updateClocks();
-}
+function tick() { updateMyTime(); updateClocks(); }
 
-// Search
+// Search — fast local fuzzy match across 400+ cities
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
-let searchDebounce = null;
-let lastQuery = '';
-let lastAIResults = [];
 
-function showSearchLoading() {
-  searchResults.innerHTML = '<div class="search-item" style="justify-content:center;color:var(--text-secondary);font-size:14px;gap:8px;"><span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.2);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;"></span>&nbsp;Searching…</div>';
-  searchResults.classList.add('visible');
-}
-
-function renderSearchResults(results) {
-  if (!results.length) {
-    searchResults.innerHTML = '<div class="search-item" style="color:var(--text-secondary);font-size:14px;">No cities found</div>';
-  } else {
-    searchResults.innerHTML = results.map((c, idx) => {
-      const already = savedClocks.some(s => s.city === c.city && s.tz === c.tz);
-      return `<div class="search-item" onclick="addClockFromResult(${idx})">
-        <span class="search-item-flag">${c.flag}</span>
-        <div class="search-item-info">
-          <div class="search-item-city">${c.city}</div>
-          <div class="search-item-country">${c.country}</div>
-        </div>
-        ${already
-          ? '<span class="search-item-add" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3)">Added</span>'
-          : '<span class="search-item-add">+ Add</span>'}
-      </div>`;
-    }).join('');
-  }
-  searchResults.classList.add('visible');
-}
-
-async function aiSearch(q) {
-  const localMatches = CITIES.filter(c =>
-    c.city.toLowerCase().includes(q.toLowerCase()) || c.country.toLowerCase().includes(q.toLowerCase())
-  ).slice(0, 5);
-
-  if (localMatches.length) {
-    lastAIResults = localMatches;
-    renderSearchResults(localMatches);
-  } else {
-    showSearchLoading();
-  }
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 800,
-        messages: [{
-          role: 'user',
-          content: 'The user typed "' + q + '" into a world clock city search. Return up to 6 matching cities as a JSON array. Each object must have: city (string), country (string), tz (valid IANA timezone string e.g. "America/New_York"), flag (country flag emoji). Only return the raw JSON array, no markdown, no explanation. If the query does not match any real city return [].'
-        }]
-      })
-    });
-    const data = await response.json();
-    const text = data.content.map(b => b.text || '').join('').trim().replace(/```json|```/g, '').trim();
-    const results = JSON.parse(text);
-    if (Array.isArray(results) && results.length) {
-      const seen = new Set(localMatches.map(c => c.city + '|' + c.tz));
-      const aiOnly = results.filter(c => !seen.has(c.city + '|' + c.tz));
-      lastAIResults = [...localMatches, ...aiOnly].slice(0, 8);
-      renderSearchResults(lastAIResults);
-    } else if (!localMatches.length) {
-      lastAIResults = [];
-      renderSearchResults([]);
-    }
-  } catch (e) {
-    if (!localMatches.length) {
-      searchResults.innerHTML = '<div class="search-item" style="color:var(--text-secondary);font-size:14px;">Search unavailable</div>';
-    }
-  }
+function score(city, q) {
+  const name = city.city.toLowerCase();
+  const country = city.country.toLowerCase();
+  if (name === q) return 100;
+  if (name.startsWith(q)) return 80;
+  if (country.startsWith(q)) return 60;
+  if (name.includes(q)) return 40;
+  if (country.includes(q)) return 20;
+  return 0;
 }
 
 searchInput.addEventListener('input', () => {
-  const q = searchInput.value.trim();
-  if (!q) { searchResults.classList.remove('visible'); lastAIResults = []; lastQuery = ''; return; }
-  if (q === lastQuery) return;
-  lastQuery = q;
-  clearTimeout(searchDebounce);
-  searchDebounce = setTimeout(() => aiSearch(q), 350);
+  const q = searchInput.value.trim().toLowerCase();
+  if (!q) { searchResults.classList.remove('visible'); return; }
+  const matches = CITIES
+    .map(c => ({ c, s: score(c, q) }))
+    .filter(x => x.s > 0)
+    .sort((a, b) => b.s - a.s)
+    .slice(0, 8)
+    .map(x => x.c);
+  if (!matches.length) { searchResults.classList.remove('visible'); return; }
+  searchResults.innerHTML = matches.map((c, idx) => {
+    const already = savedClocks.some(s => s.city === c.city && s.tz === c.tz);
+    return `<div class="search-item" onclick="addClockAtIndex(${CITIES.indexOf(c)})">
+      <span class="search-item-flag">${c.flag}</span>
+      <div class="search-item-info">
+        <div class="search-item-city">${c.city}</div>
+        <div class="search-item-country">${c.country}</div>
+      </div>
+      ${already ? '<span class="search-item-add" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3)">Added</span>' : '<span class="search-item-add">+ Add</span>'}
+    </div>`;
+  }).join('');
+  searchResults.classList.add('visible');
 });
 
 document.addEventListener('click', e => {
   if (!e.target.closest('.search-wrap')) searchResults.classList.remove('visible');
 });
 
-function addClockFromResult(idx) {
-  const c = lastAIResults[idx];
+function addClockAtIndex(idx) {
+  const c = CITIES[idx];
   if (!c) return;
   if (!savedClocks.some(s => s.city === c.city && s.tz === c.tz)) {
     savedClocks.push(c);
@@ -680,28 +895,14 @@ function addClockFromResult(idx) {
   }
   searchInput.value = '';
   searchResults.classList.remove('visible');
-  lastAIResults = [];
-  lastQuery = '';
-}
-
-function addClock(city) {
-  const c = CITIES.find(x => x.city === city);
-  if (!c || savedClocks.some(s => s.city === c.city && s.tz === c.tz)) return;
-  savedClocks.push(c);
-  localStorage.setItem('worldClocks', JSON.stringify(savedClocks));
-  buildClocks(savedClocks.length - 1);
-  searchInput.value = '';
-  searchResults.classList.remove('visible');
 }
 
 let editMode = false;
 function toggleEdit() {
   editMode = !editMode;
   document.querySelector('.edit-btn').textContent = editMode ? 'Done' : 'Edit';
-  // simple long-press delete
 }
 
-// Long press to delete
 let pressTimer;
 document.getElementById('clockList').addEventListener('mousedown', e => {
   const card = e.target.closest('.clock-card');
@@ -717,8 +918,6 @@ document.getElementById('clockList').addEventListener('mousedown', e => {
 });
 document.getElementById('clockList').addEventListener('mouseup', () => clearTimeout(pressTimer));
 document.getElementById('clockList').addEventListener('mouseleave', () => clearTimeout(pressTimer));
-
-// Touch support for delete
 document.getElementById('clockList').addEventListener('touchstart', e => {
   const card = e.target.closest('.clock-card');
   if (!card) return;
@@ -737,5 +936,6 @@ buildClocks();
 tick();
 setInterval(tick, 1000);
 </script>
+
 </body>
 </html>
