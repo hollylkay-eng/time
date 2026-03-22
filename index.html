@@ -477,8 +477,9 @@ function getLocalOffset(tz) {
 
 function formatDiff(diff) {
   if (Math.abs(diff) < 0.05) return { text: "Same time", cls: "same" };
-  const h = Math.floor(Math.abs(diff));
-  const m = Math.round((Math.abs(diff) - h) * 60);
+  const totalMins = Math.round(Math.abs(diff) * 60);
+  const h = Math.floor(totalMins / 60);
+  const m = totalMins % 60;
   let s = '';
   if (h) s += `${h}h`;
   if (m) s += `${h ? ' ' : ''}${m}m`;
