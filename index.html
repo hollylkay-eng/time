@@ -140,6 +140,7 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   }
   .search-results.visible { display: block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .search-item {
     padding: 14px 16px;
     cursor: pointer;
@@ -582,38 +583,113 @@ function tick() {
 // Search
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
+let searchDebounce = null;
+let lastQuery = '';
+let lastAIResults = [];
+
+function showSearchLoading() {
+  searchResults.innerHTML = '<div class="search-item" style="justify-content:center;color:var(--text-secondary);font-size:14px;gap:8px;"><span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.2);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;"></span>&nbsp;Searching…</div>';
+  searchResults.classList.add('visible');
+}
+
+function renderSearchResults(results) {
+  if (!results.length) {
+    searchResults.innerHTML = '<div class="search-item" style="color:var(--text-secondary);font-size:14px;">No cities found</div>';
+  } else {
+    searchResults.innerHTML = results.map((c, idx) => {
+      const already = savedClocks.some(s => s.city === c.city && s.tz === c.tz);
+      return `<div class="search-item" onclick="addClockFromResult(${idx})">
+        <span class="search-item-flag">${c.flag}</span>
+        <div class="search-item-info">
+          <div class="search-item-city">${c.city}</div>
+          <div class="search-item-country">${c.country}</div>
+        </div>
+        ${already
+          ? '<span class="search-item-add" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3)">Added</span>'
+          : '<span class="search-item-add">+ Add</span>'}
+      </div>`;
+    }).join('');
+  }
+  searchResults.classList.add('visible');
+}
+
+async function aiSearch(q) {
+  const localMatches = CITIES.filter(c =>
+    c.city.toLowerCase().includes(q.toLowerCase()) || c.country.toLowerCase().includes(q.toLowerCase())
+  ).slice(0, 5);
+
+  if (localMatches.length) {
+    lastAIResults = localMatches;
+    renderSearchResults(localMatches);
+  } else {
+    showSearchLoading();
+  }
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 800,
+        messages: [{
+          role: 'user',
+          content: 'The user typed "' + q + '" into a world clock city search. Return up to 6 matching cities as a JSON array. Each object must have: city (string), country (string), tz (valid IANA timezone string e.g. "America/New_York"), flag (country flag emoji). Only return the raw JSON array, no markdown, no explanation. If the query does not match any real city return [].'
+        }]
+      })
+    });
+    const data = await response.json();
+    const text = data.content.map(b => b.text || '').join('').trim().replace(/```json|```/g, '').trim();
+    const results = JSON.parse(text);
+    if (Array.isArray(results) && results.length) {
+      const seen = new Set(localMatches.map(c => c.city + '|' + c.tz));
+      const aiOnly = results.filter(c => !seen.has(c.city + '|' + c.tz));
+      lastAIResults = [...localMatches, ...aiOnly].slice(0, 8);
+      renderSearchResults(lastAIResults);
+    } else if (!localMatches.length) {
+      lastAIResults = [];
+      renderSearchResults([]);
+    }
+  } catch (e) {
+    if (!localMatches.length) {
+      searchResults.innerHTML = '<div class="search-item" style="color:var(--text-secondary);font-size:14px;">Search unavailable</div>';
+    }
+  }
+}
 
 searchInput.addEventListener('input', () => {
-  const q = searchInput.value.toLowerCase().trim();
-  if (!q) { searchResults.classList.remove('visible'); return; }
-  const matches = CITIES.filter(c =>
-    c.city.toLowerCase().includes(q) || c.country.toLowerCase().includes(q)
-  ).slice(0, 8);
-  if (!matches.length) { searchResults.classList.remove('visible'); return; }
-  searchResults.innerHTML = matches.map(c => {
-    const already = savedClocks.some(s => s.city === c.city && s.tz === c.tz);
-    return `<div class="search-item" onclick="addClock('${c.city}')">
-      <span class="search-item-flag">${c.flag}</span>
-      <div class="search-item-info">
-        <div class="search-item-city">${c.city}</div>
-        <div class="search-item-country">${c.country}</div>
-      </div>
-      ${already ? '<span class="search-item-add" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.3)">Added</span>' : '<span class="search-item-add">+ Add</span>'}
-    </div>`;
-  }).join('');
-  searchResults.classList.add('visible');
+  const q = searchInput.value.trim();
+  if (!q) { searchResults.classList.remove('visible'); lastAIResults = []; lastQuery = ''; return; }
+  if (q === lastQuery) return;
+  lastQuery = q;
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(() => aiSearch(q), 350);
 });
 
 document.addEventListener('click', e => {
   if (!e.target.closest('.search-wrap')) searchResults.classList.remove('visible');
 });
 
+function addClockFromResult(idx) {
+  const c = lastAIResults[idx];
+  if (!c) return;
+  if (!savedClocks.some(s => s.city === c.city && s.tz === c.tz)) {
+    savedClocks.push(c);
+    localStorage.setItem('worldClocks', JSON.stringify(savedClocks));
+    buildClocks(savedClocks.length - 1);
+  }
+  searchInput.value = '';
+  searchResults.classList.remove('visible');
+  lastAIResults = [];
+  lastQuery = '';
+}
+
 function addClock(city) {
   const c = CITIES.find(x => x.city === city);
   if (!c || savedClocks.some(s => s.city === c.city && s.tz === c.tz)) return;
   savedClocks.push(c);
   localStorage.setItem('worldClocks', JSON.stringify(savedClocks));
-  buildClocks(savedClocks.length - 1); // pass index of new card to animate
+  buildClocks(savedClocks.length - 1);
   searchInput.value = '';
   searchResults.classList.remove('visible');
 }
